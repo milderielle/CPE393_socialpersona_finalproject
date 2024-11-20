@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personality Prediction System</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+      crossorigin="anonymous"
+    />
+    <!-- Font Awesome CDN for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      /* Add background to navbar */
+      .navbar {
+        background: linear-gradient(135deg, #ba3a2b 0%, #ba3a2b 100%); /* Gradient background */
+        color: white;
+      }
+
+      /* Optional: Change navbar brand text color */
+      .navbar-brand {
+        color: white;
+      }
+
+      /* Optional: Change navbar links color */
+      .navbar-nav .nav-link {
+        color: white;
+      }
+
+      /* Optional: Change navbar links hover color */
+      .navbar-nav .nav-link:hover {
+        color: #ba3a2b;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        color: #333;
+        /* Gradient background */
+        background: linear-gradient(135deg, #141414 0%, #494949 100%);
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        background-color: #ffffff;
+        color: #333333;
+        font-weight: bold;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        margin-top: 30px;
+      }
+
+      h1 {
+        color: #ba3a2b;
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 32px;
+      }
+
+      .result-frame, .mbti-frame {
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        padding: 20px;
+        background-color: #f8f9fa;
+        margin-top: 20px;
+      }
+
+      .result-frame h3, .mbti-frame h3 {
+        text-align: center;
+        color: #ba3a2b;
+      }
+
+      .result-frame p, .mbti-frame p {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #000000;
+      }
+
+      .btn-primary {
+        background-color: #ba3a2b;
+        border-color: #ffffff;
+        font-size: 18px;
+        padding: 12px 30px;
+        border-radius: 5px;
+      }
+
+      .btn-primary:hover {
+        background-color: #4d1c16;
+        border-color: #ba3a2b;
+      }
+
+      .mbti-section {
+        border-top: 1px solid #ddd;
+        padding-top: 15px;
+        margin-top: 15px;
+      }
+
+      .mbti-section h4 {
+        font-size: 20px;
+        color: #834725;
+        margin-bottom: 15px;
+      }
+
+      .mbti-section p {
+        font-size: 16px;
+        color: #555;
+      }
+
+      .mbti-section strong {
+        color: #ba3a2b;
+      }
+    </style>
+  </head>
+  <body>
+    <!--=======================navbar=====================================================-->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">Social Persona</a>
+      </div>
+    </nav>
+    <!--==========================================================================================-->
+    <div class="container my-5">
+      <h1>
+        Personality Prediction System 💡
+      </h1>
+      <!-- Adding form -->
+      <form id="prediction-form">
+        <div class="row mb-4">
+          <div class="col-md-12">
+            <label for="user_input" class="form-label">Tell me about your self</label>
+            <textarea
+              id="user_input"
+              name="user_input"
+              placeholder="Tell me about your self..."
+              class="form-control"
+              rows="5"
+              required
+            ></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <button type="submit" class="btn btn-primary btn-lg">
+              Predict Personality
+            </button>
+          </div>
+        </div>
+      </form>
+      <div id="result" class="result-frame mt-4" style="display: none">
+        <h3>Prediction Results:</h3>
+        <p id="prediction-text"></p>
+        <p id="probability-text"></p>
+        <p id="animal-text"></p>
+        <div class="text-center">
+          <img
+            id="animal-image"
+            src=""
+            alt="Animal Image"
+            style="max-width: 150px; max-height: 150px; margin-top: 10px;"
+          />
+        </div>
+      </div>
+      <div class="mbti-frame mt-4">
+        <h3>What is the Myers-Briggs Type Indicator (MBTI)?</h3>
+        <p>
+          The Myers-Briggs Type Indicator (MBTI) is a self-report questionnaire
+          designed to indicate psychological preferences in how people perceive
+          the world and make decisions. It is based on Carl Jung's theory of
+          psychological types.
+        </p>
+
+        <!-- Extraversion / Introversion -->
+        <div class="mbti-section">
+          <h4>Extraversion (E) / Introversion (I)</h4>
+          <p>
+            🐬<strong>Extraversion (E) - Dolphin</strong>: Social, playful, loves communication and group activities. Dolphins are known for their friendly nature and energy, making them a good symbol for extraverts who thrive on social interaction.
+          </p>
+          <p>
+            🦉<strong>Introversion (I) - Owl</strong>: Quiet, deep thinker, enjoys solitude and working in calm environments. Owls are often associated with wisdom, reflection, and observation, traits typical of introverts who value deep thinking.
+          </p>
+        </div>
+
+        <!-- Sensing / Intuition -->
+        <div class="mbti-section">
+          <h4>Sensing (S) / Intuition (N)</h4>
+          <p>
+            🐘<strong>Sensing (S) - Elephant</strong>: Detail-oriented, grounded in reality, focuses on facts and careful observation. Elephants are known for their excellent memory and attention to tangible details, aligning with sensors who prefer concrete information.
+          </p>
+          <p>
+            🦅<strong>Intuition (N) - Eagle</strong>: Visionary, sees the big picture, seeks possibilities and opportunities. Eagles are admired for their ability to see far into the distance, symbolizing intuitive types who focus on abstract concepts and future possibilities.
+          </p>
+        </div>
+
+        <!-- Thinking / Feeling -->
+        <div class="mbti-section">
+          <h4>Thinking (T) / Feeling (F)</h4>
+          <p>
+            🐺<strong>Thinking (T) - Wolf</strong>: Analytical, logical, focuses on truth and planning. Wolves are strategic, organized hunters, representing thinkers who prioritize logic and efficiency.
+          </p>
+          <p>
+            🐶<strong>Feeling (F) - Dog</strong>: Empathetic, caring, focuses on relationships and harmony. Dogs are loyal, social, and supportive animals, embodying feelers who value empathy and connection with others.
+          </p>
+        </div>
+
+        <!-- Judging / Perceiving -->
+        <div class="mbti-section">
+          <h4>Judging (J) / Perceiving (P)</h4>
+          <p>
+            🐝<strong>Judging (J) - Bee</strong>: Structured, organized, loves planning and order. Bees are industrious, hard-working creatures that follow clear systems, much like judgers who appreciate structure and schedules.
+          </p>
+          <p>
+            🦊<strong>Perceiving (P) - Fox</strong>: Flexible, adaptable, enjoys exploring new things. Foxes are known for their cunning and adaptability, symbolizing perceivers who are spontaneous and open to change.
+          </p>
+        </div>
+
+      </div>
+    </div>
+    <script>
+        document.getElementById("prediction-form").onsubmit = async function (
+          event
+        ) {
+          event.preventDefault();
+          const formData = new FormData(this);
+          const response = await fetch("/predict", {
+            method: "POST",
+            body: formData,
+          });
+          const result = await response.json();
+          document.getElementById("result").style.display = "block";
+          document.getElementById(
+            "prediction-text"
+          ).innerText = `Prediction (MBTI): ${result.prediction}`;
+          document.getElementById(
+            "probability-text"
+          ).innerText = `Probability: ${result.probability}`;
+          document.getElementById(
+            "animal-text"
+          ).innerText = `Animal: ${result.animal}`;
+          document.getElementById(
+            "animal-image"
+          ).src = `../pic/${result.animal.toLowerCase()}.png`;
+        };
+      </script>
+      <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"
+      ></script>
+    </body>
+  </html>
